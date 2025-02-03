@@ -1,10 +1,10 @@
-import { timestamp } from "drizzle-orm/mysql-core";
-import { integer, pgTable, varchar } from "drizzle-orm/pg-core";
+import { integer, pgTable, text, timestamp, boolean } from "drizzle-orm/pg-core";
 
-export const todosTable = pgTable("users", {
+export const todosTable = pgTable("todos", {
   id: integer().primaryKey().generatedAlwaysAsIdentity(),
   todo: text().notNull(),
-  createdAt: timestamp('created_at').defaultNow,
+  isDone: boolean().default(false),
+  createdAt: timestamp('created_at').defaultNow(),
   updatedAt: timestamp('updated_at').$onUpdate(()=> new Date()),
 });
 
